@@ -40,11 +40,8 @@
 
 						{# Affiche les infos uniquement lorsque l'utilisateur est connecté #}
 						{% if is_granted('ROLE_USER') %}
-							<li class="nav-item">
-								<a class="nav-link" href="#">Mon compte</a>
-							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
 								<ul class="dropdown-menu">
 									<li>
 										<a class="dropdown-item" href="#">Action</a>
@@ -61,9 +58,9 @@
 					</ul>
 					<div class="d-lg-flex col-lg-3 justify-content-lg-end">
 						{% if is_granted('ROLE_USER') %}
-							<button class="btn rounded-pill btn-warning">Déconnexion</button>
+							<a href={{ path('app_logout') }} class="btn rounded-pill btn-warning">Déconnexion</a>
 						{% else %}
-							<button class="btn rounded-pill btn-primary">Connexion</button>
+							<a href={{ path('app_login') }} class="btn rounded-pill btn-primary">Connexion</a>
 						{% endif %}
 					</div>
 				</div>
