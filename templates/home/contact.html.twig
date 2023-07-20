@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}Contact
+{% endblock %}
 
 {% block body %}
 
-<h1 class="text-center mt-5 mb-5">Contactez-nous</h1>
+	<h1 class="text-center mt-5 mb-5">Contactez-nous</h1>
 
-{{ dump(result) }}
+	{{ dump(result) }}
 
-<div class="d-flex justify-content-center m-auto pt-5 pb-5">
-	{{ form_start(contactForm) }}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+	{% endfor %}
+
+	<div class="d-flex justify-content-center m-auto pt-5 pb-5">
+		{{ form_start(contactForm) }}
 
 		<div class="mb-3">
 			<label for="contact_Nom">{{ form_label(contactForm.Nom) }}</label>
@@ -35,7 +40,7 @@
 			<label for="contact_Message">{{ form_label(contactForm.Message) }}</label>
 			{{ form_widget(contactForm.Message, {'attr': {'class': 'form-control'}}) }}
 		</div>
-	{{ form_end(contactForm) }}
-</div>
+		{{ form_end(contactForm) }}
+	</div>
 
 {% endblock %}
