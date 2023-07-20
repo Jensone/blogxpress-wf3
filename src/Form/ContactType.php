@@ -53,13 +53,6 @@ class ContactType extends AbstractType
                     ]),
                 ],
             ]) // Terminé
-
-
-
-
-
-
-
             ->add('Sujet', ChoiceType::class, [
                 'choices'  => [
                     'Informations' => 'Informations',
@@ -67,14 +60,7 @@ class ContactType extends AbstractType
                     'Autre' => 'Autre',
                 ],
                 'label' => 'À quel sujet vous nous contactez ?',
-            ])
-
-
-
-
-            
-
-
+            ]) // Terminé
             ->add('Email', EmailType::class, [
                 'required' => true,
                 'attr' => ['placeholder' => 'Votre adresse email'],
