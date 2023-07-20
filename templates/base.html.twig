@@ -13,86 +13,45 @@
 		<link rel="stylesheet" href={{ asset('css/style.css') }}>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
-			<div class="container-fluid">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-					<a class="navbar-brand col-lg-3 me-0" href={{ path('home') }}>BlogXpress</a>
-					<ul class="navbar-nav col-lg-6 justify-content-lg-center">
-						<li class="nav-item">
-							<a class="nav-link" href="#">Loisirs</a>
+		<nav class="d-flex p-2 bg-body-tertiary align-items-center justify-content-between">
+			<a class="navbar-brand me-0" href={{ path('home') }}>
+				<img src={{ asset('bx-line-dark.png') }} alt="logo blogxpress" width="200">
+			</a>
+			{% if is_granted('ROLE_USER') %}
+				{# Affiche les infos uniquement lorsque l'utilisateur est connecté #}
+				<div class="btn-group dropstart">
+					<button type="button" class="btn btn-outline-secondary rounded-pill dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Gestion
+					</button>
+					<ul class="dropdown-menu shadow border-0">
+						<li>
+							<a class="dropdown-item" href={{ path('app_article_index') }}>Les articles</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Cinémas</a>
+						<li>
+							<a class="dropdown-item" href={{ path('app_category_index') }}>Les catégories</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link">Hôtels</a>
+						<li>
+							<a class="dropdown-item" href={{ path('app_article_new') }}>Rédiger un article</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link">Restaurants</a>
+						<li>
+							<a href={{ path('app_logout') }} class="dropdown-item">Déconnexion</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link">Spas</a>
-						</li>
-
-						{# Affiche les infos uniquement lorsque l'utilisateur est connecté #}
-						{% if is_granted('ROLE_USER') %}
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a class="dropdown-item" href={{ path('app_article_index') }}>Les articles</a>
-									</li>
-									<li>
-										<a class="dropdown-item" href={{ path('app_category_index') }}>Les catégories</a>
-									</li>
-									<li>
-										<a class="dropdown-item" href={{ path('app_article_new') }}>Rédiger un article</a>
-									</li>
-								</ul>
-							</li>
-						{% endif %}
 					</ul>
-					<div class="d-lg-flex col-lg-3 justify-content-lg-end">
-						{% if is_granted('ROLE_USER') %}
-							<a href={{ path('app_logout') }} class="btn rounded-pill btn-warning">Déconnexion</a>
-						{% else %}
-							<a href={{ path('app_login') }} class="btn rounded-pill btn-primary">Connexion</a>
-						{% endif %}
-					</div>
 				</div>
-			</div>
+			{% else %}
+				<a href={{ path('app_login') }} class="text-dark">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 512 512"><path fill="currentColor" d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1c117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48Zm126.42 327.25a4 4 0 0 1-6.14-.32a124.27 124.27 0 0 0-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 0 0-32.35 29.58a4 4 0 0 1-6.14.32A175.32 175.32 0 0 1 80 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 0 1-46.68 119.25Z"/><path fill="currentColor" d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144Z"/></svg>
+				</a>
+			{% endif %}
 		</nav>
 
-		<div class="container">
-			{% block body %}{% endblock %}
-		</div>
+		{# Contenu des pages qui "extends" le template base.html.twig #}
+		<div class="container"> {% block body %}{% endblock %}</div>
 
-		<div class="container-fluid">
-			<footer class="py-3 my-4">
-				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-					<li class="nav-item">
-						<a href="#" class="nav-link px-2 text-body-secondary">Home</a>
-					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link px-2 text-body-secondary">Features</a>
-					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link px-2 text-body-secondary">Pricing</a>
-					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link px-2 text-body-secondary">FAQs</a>
-					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link px-2 text-body-secondary">About</a>
-					</li>
-				</ul>
-				<p class="text-center text-body-secondary">© 2023 Company, Inc</p>
-			</footer>
-		</div>
+		<footer class="py-3 my-4 border-top">
+			<p class="text-center text-body-secondary">&copy; {{ 'now'|date('Y') }} BlogXpress</p>
+		</footer>
+
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	</body>
 </html>
