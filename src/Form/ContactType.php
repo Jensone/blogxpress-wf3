@@ -20,10 +20,12 @@ class ContactType extends AbstractType
             ->add('Nom', TextType::class, [
                 'required' => true,
                 'attr' => ['placeholder' => 'Votre nom'],
+                'label' => 'Quel est votre nom ?',
             ])
             ->add('Prenom', TextType::class, [
                 'required' => true,
                 'attr' => ['placeholder' => 'Votre prénom'],
+                'label' => 'Quel est votre prénom ?',
             ])
             ->add('Sujet', ChoiceType::class, [
                 'choices'  => [
@@ -31,10 +33,26 @@ class ContactType extends AbstractType
                     'Partenariat' => 'Partenariat',
                     'Autre' => 'Autre',
                 ],
+                'label' => 'À quel sujet vous nous contactez ?',
             ])
-            ->add('Email', EmailType::class, [])
-            ->add('Telephone', TelType::class, [])
-            ->add('Message', TextareaType::class, [])
+            ->add('Email', EmailType::class, [
+                'required' => true,
+                'attr' => ['placeholder' => 'Votre adresse email'],
+                'label' => 'Saisissez votre adresse email',
+            ])
+            ->add('Telephone', TelType::class, [
+                'required' => false,
+                'attr' => ['placeholder' => 'Votre numéro de téléphone'],
+                'label' => 'Avez-vous un numéro de téléphone ?',
+            ])
+            ->add('Message', TextareaType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Rédigez votre message juste ici',
+                    'rows' => 10
+                ],
+                'label' => 'Rédigez votre message',
+            ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success rounded-pill'],
             ])
