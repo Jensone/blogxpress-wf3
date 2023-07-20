@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ContactType extends AbstractType
 {
@@ -52,6 +53,13 @@ class ContactType extends AbstractType
                     ]),
                 ],
             ]) // Terminé
+
+
+
+
+
+
+
             ->add('Sujet', ChoiceType::class, [
                 'choices'  => [
                     'Informations' => 'Informations',
@@ -64,6 +72,7 @@ class ContactType extends AbstractType
 
 
 
+            
 
 
             ->add('Email', EmailType::class, [
@@ -75,22 +84,24 @@ class ContactType extends AbstractType
                         'message' => 'Veuillez saisir une adresse email valide'
                     ])
                 ]
-            ])
-
-
-
-
-
-
-
-            
-
-
+            ]) // Terminé
             ->add('Telephone', TelType::class, [
                 'required' => false,
                 'attr' => ['placeholder' => 'Votre numéro de téléphone'],
                 'label' => 'Avez-vous un numéro de téléphone ?',
-            ])
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/[+]{1}[3]{2}[1-7]{1}[0-9]{8}/',
+                        'message' => 'Veuillez saisir un numéro de téléphone valide'
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Votre numéro de téléphone doit contenir au moins {{ limit }} caractères',
+                        'max' => 15,
+                        'maxMessage' => 'Votre numéro de téléphone doit contenir au maximum {{ limit }} caractères',
+                    ]),
+                ]
+            ]) // Terminé
             ->add('Message', TextareaType::class, [
                 'required' => true,
                 'attr' => [
