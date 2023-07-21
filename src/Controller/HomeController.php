@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Form\ContactType;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArticleRepository;
@@ -83,6 +84,15 @@ class HomeController extends AbstractController
     {
         return $this->render('article/article.html.twig', [
             'article' => $article,
+        ]);
+    }
+
+    // Route pour visionner une categorie seule
+    #[Route('/category/{id}', name: 'category', methods: ['GET'])]
+    public function showCategory(Category $category): Response
+    {
+        return $this->render('category/category.html.twig', [
+            'category' => $category,
         ]);
     }
 
