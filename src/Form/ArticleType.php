@@ -24,7 +24,7 @@ class ArticleType extends AbstractType
                 'label' => 'Titre de l\'article',
                 'attr' => [
                     'class' => 'form-control mb-3'
-                ]
+                ],
             ])
             ->add(
                 'content',
@@ -53,6 +53,7 @@ class ArticleType extends AbstractType
                 ],
             ])
             ->add('image', FileType::class, [
+                'mapped' => false, // On ne lie pas ce champ à la propriété 'image' de l'entité Article
                 'label' => 'Téléversez l\'image de l\'article',
                 'attr' => [
                     'class' => 'form-control mb-3'
