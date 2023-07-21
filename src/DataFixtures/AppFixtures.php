@@ -68,27 +68,29 @@ class AppFixtures extends Fixture
                 'image' => '10.jpeg'
             ],
         ];
-        
-        for ($i = 0; $i < 5; $i++) {
 
-            // CATÉGORIES
-            // Je liste les catégories que je veux créer
-            $categories = [
-                'Loisirs',
-                'Spas',
-                'Cinémas',
-                'Restaurants',
-                'Hotels'
-            ];
+        // CATÉGORIES
+        // Je liste les catégories que je veux créer
+        $categories = [
+            'Loisirs',
+            'Spas',
+            'Cinémas',
+            'Restaurants',
+            'Hotels'
+        ];
 
 
-
+        foreach ($categories as $item) {
             // Je crée un nouvel objet catégorie
             $categorie = new Category();
             // J'utilise la méthode setName pour définir le nom de la catégorie
-            $categorie->setName($categories[$i]);
+            $categorie->setName($item);
             // J'enregistre la catégorie en base de données avec Doctrine
             $manager->persist($categorie);
+        }
+
+
+        foreach ($articles as $item) {
 
             // AUTEURS
             // Je crée un nouvel objet auteur
@@ -101,13 +103,15 @@ class AppFixtures extends Fixture
             // Je crée un nouvel objet article
             $article = new Article();
             // J'utilise la méthode setTitle pour définir le titre de l'article
-            $article->setTitle($faker->sentence(1));
+            $article->setTitle($item['title']);
             // J'utilise la méthode setContent pour définir le contenu de l'article
-            $article->setContent($faker->paragraph(4));
+            $article->setContent($item['content']);
             // J'utilise la méthode setCategory pour définir la catégorie de l'article
             $article->setCategory($categorie);
             // J'utilise la méthode setAuthor pour définir l'auteur de l'article
             $article->setAuthor($auteur);
+            // J'utilise la méthode setImage pour définir l'image de l'article
+            $article->setImage($item['image']);
             // J'enregistre l'article en base de données avec Doctrine
             $manager->persist($article);
         }

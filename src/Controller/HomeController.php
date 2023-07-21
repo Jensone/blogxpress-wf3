@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Form\ContactType;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArticleRepository;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    // Route pour la page d'accueil
     #[Route('/', name: 'home', methods: ['GET'])]
     public function index(ArticleRepository $articles): Response
     {
@@ -21,6 +23,7 @@ class HomeController extends AbstractController
         ]);
     }
 
+    // Route pour la page contact
     #[Route('/contact', name: 'contact', methods: ['GET', 'POST'])]
     public function contact(Request $request, MailerInterface $mailer): Response
     {
@@ -66,4 +69,32 @@ class HomeController extends AbstractController
             'result' => $result,
         ]);
     }
+
+
+
+
+
+
+
+
+    // Route pour visionner un article seul
+    #[Route('/article/{id}', name: 'article', methods: ['GET'])]
+    public function show(Article $article): Response
+    {
+        return $this->render('article/article.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
